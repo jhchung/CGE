@@ -1,0 +1,1286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Golden</title>
+
+<base target="_blank"/>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Golden</h1>
+
+<h1>Question 1: Compare Segway and ChromHMM bed files</h1>
+
+<p>The k562 segway bed file is 1.1 gigabytes in size while the ChromHMM bed files only 44 megabytes. This may be because ChromHMM determines chromatin state in chunks, hundreds of base pairs, and seems to skip large sections of the chromosome, especially at the ends. On the other hand, segway is able to perform analysis at base pair resolution, and annotate much smaller sections of the genome.</p>
+
+<p>Another reason for the larger size of the Segway bed file is that Segway annotates more states than ChromHMM. Segway identifies 25 different states compared to the 15 found by ChromHMM.</p>
+
+<table><thead>
+<tr>
+<th align="left">File name</th>
+<th align="right">File size</th>
+<th align="right">Number of lines</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">K562_segway.bed</td>
+<td align="right">1.1G</td>
+<td align="right">16,849,745</td>
+</tr>
+<tr>
+<td align="left">K562_hmm.bed</td>
+<td align="right">44M</td>
+<td align="right">621,678</td>
+</tr>
+</tbody></table>
+
+<h1>Question 2: Perform analysis of Segway annotations</h1>
+
+<h2>Count total number of states in segway annotation file</h2>
+
+<p>To count the total number of states, run annotations_segway.do which counts the number of lines with the given segway states. First, make annotations_segway.do executable and then run and pipe the output to segway_out.txt file.</p>
+
+<pre><code class="r">chmod u+x annotations_segway.do
+./annotations_segway.do &gt; segway_out.txt
+
+# Cut the first column of segway_annotation file because parse_fst.py
+# can only handle a single column for the annotation in a later step.
+cut -f 1 segway_annotation.txt &gt; cut_segway_annotation.txt
+
+# Paste annotations with counts
+paste cut_segway_annotation.txt segway_out.txt &gt; K562_segway_annotation_counts.txt
+</code></pre>
+
+<h4>Segway annotations and their counts</h4>
+
+<table><thead>
+<tr>
+<th align="left">Annotation</th>
+<th align="right">Description</th>
+<th align="left">Count</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">D</td>
+<td align="right">dead zone</td>
+<td align="left">1616227</td>
+</tr>
+<tr>
+<td align="left">L0</td>
+<td align="right">low zone</td>
+<td align="left">1159248</td>
+</tr>
+<tr>
+<td align="left">L1</td>
+<td align="right">low zone</td>
+<td align="left">1450189</td>
+</tr>
+<tr>
+<td align="left">F0</td>
+<td align="right">FAIRE only</td>
+<td align="left">1597574</td>
+</tr>
+<tr>
+<td align="left">F1</td>
+<td align="right">FAIRE only</td>
+<td align="left">2107182</td>
+</tr>
+<tr>
+<td align="left">R0</td>
+<td align="right">repression</td>
+<td align="left">1411635</td>
+</tr>
+<tr>
+<td align="left">R1</td>
+<td align="right">repression</td>
+<td align="left">652611</td>
+</tr>
+<tr>
+<td align="left">R2</td>
+<td align="right">repression</td>
+<td align="left">935752</td>
+</tr>
+<tr>
+<td align="left">R3</td>
+<td align="right">repression</td>
+<td align="left">783845</td>
+</tr>
+<tr>
+<td align="left">R4</td>
+<td align="right">repression</td>
+<td align="left">383762</td>
+</tr>
+<tr>
+<td align="left">R5</td>
+<td align="right">repression</td>
+<td align="left">402257</td>
+</tr>
+<tr>
+<td align="left">C0</td>
+<td align="right">CTCF (strong)</td>
+<td align="left">33903</td>
+</tr>
+<tr>
+<td align="left">C1</td>
+<td align="right">CTCF (weak)</td>
+<td align="left">109547</td>
+</tr>
+<tr>
+<td align="left">H3K9me1</td>
+<td align="right">H3K9me1 only</td>
+<td align="left">869101</td>
+</tr>
+<tr>
+<td align="left">TF0</td>
+<td align="right">transcription factor activity</td>
+<td align="left">526151</td>
+</tr>
+<tr>
+<td align="left">TF1</td>
+<td align="right">transcription factor activity</td>
+<td align="left">675284</td>
+</tr>
+<tr>
+<td align="left">TF2</td>
+<td align="right">transcription factor activity</td>
+<td align="left">225116</td>
+</tr>
+<tr>
+<td align="left">TSS</td>
+<td align="right">transcription start site</td>
+<td align="left">25724</td>
+</tr>
+<tr>
+<td align="left">GS</td>
+<td align="right">gene body (start)</td>
+<td align="left">79980</td>
+</tr>
+<tr>
+<td align="left">E/GM</td>
+<td align="right">enhancer/gene middle</td>
+<td align="left">93920</td>
+</tr>
+<tr>
+<td align="left">GM0</td>
+<td align="right">gene body (middle)</td>
+<td align="left">243427</td>
+</tr>
+<tr>
+<td align="left">GM1</td>
+<td align="right">gene body (middle)</td>
+<td align="left">152188</td>
+</tr>
+<tr>
+<td align="left">GE0</td>
+<td align="right">gene body (end)</td>
+<td align="left">880359</td>
+</tr>
+<tr>
+<td align="left">GE1</td>
+<td align="right">gene body (end)</td>
+<td align="left">352083</td>
+</tr>
+<tr>
+<td align="left">GE2</td>
+<td align="right">gene body (end)</td>
+<td align="left">82680</td>
+</tr>
+</tbody></table>
+
+<p>[Table 1: Count of states in k562_segway.bed]</p>
+
+<h2>Analyze overlap with Pol2 sites</h2>
+
+<h3>Get overlap between segway and pol2 annotations</h3>
+
+<pre><code class="r"># Create an intersection of segway and pol2 annotation bed files.
+intersectBed -a k562_segway.bed -b K562_pol2.bed -wb &gt; K562_segway_pol2.bed
+
+# Compute fraction overlap
+more K562_segway.bed | wc -l &gt; segway_pol2_overlap.txt
+more K562_pol2.bed | wc -l &gt;&gt; segway_pol2_overlap.txt
+more K562_segway_pol2.bed | wc -l &gt;&gt; segway_pol2_overlap.txt
+
+# Count the segway annotations that overlap with pol2 annotations
+sed &#39;s/k562_segway.bed/K562_segway_pol2.bed/g&#39; annotations_segway.do &gt; annotations_segway_pol2.do
+chmod u+x annotations_segway_pol2.do
+./annotations_segway_pol2.do &gt; segway_pol2_out.txt
+</code></pre>
+
+<p>Only 0.5% of segway annotations overlap with pol2 annotations. This is in contrast to the 6% of ChromHMM annotations that overlap with pol2. Examination of the K562_segway_pol2.bed file shows many annotations fall within transcription start sites, enhancers and gene bodies relative to the other annotations. </p>
+
+<h3>Parse annotations of segway_pol2 intersections</h3>
+
+<p>Parse the annotations of segway and pol2 intersection using parse_tfs.py script. </p>
+
+<pre><code class="r"># Cut out the 4th column from K562_segway_pol2.bed file
+cut -f 4 K562_segway_pol2.bed &gt; K562_segway_pol2.states
+
+# Run python parse_tsf.py file
+python parse_tfs.py K562_segway_pol2.states K562_segway_annotation_counts.txt &gt; K562_segway_pol2.analysis
+</code></pre>
+
+<p>The resulting analysis of the intersection of segway and pol2 states show that the greatest overlap between the annotation files is TSS (transcription start site) with an overlap of 79.09%, but 20.81% of pol2 binding sites map to transcription start sites. The annotation that contributes the most to the Pol2/annotation state overlap is GS (gene body start) which contributes 35.76% of the intersections.</p>
+
+<h4>Pol2 site chromatin states</h4>
+
+<table><thead>
+<tr>
+<th align="right">Annotation</th>
+<th align="left">Original</th>
+<th align="left">Overlap</th>
+<th align="left">%_between</th>
+<th align="left">%_accross</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">D</td>
+<td align="left">1616227</td>
+<td align="left">116</td>
+<td align="left">0.01</td>
+<td align="left">0.12</td>
+</tr>
+<tr>
+<td align="right">L0</td>
+<td align="left">1159248</td>
+<td align="left">129</td>
+<td align="left">0.01</td>
+<td align="left">0.13</td>
+</tr>
+<tr>
+<td align="right">L1</td>
+<td align="left">1450189</td>
+<td align="left">121</td>
+<td align="left">0.01</td>
+<td align="left">0.12</td>
+</tr>
+<tr>
+<td align="right">F0</td>
+<td align="left">1597574</td>
+<td align="left">108</td>
+<td align="left">0.01</td>
+<td align="left">0.11</td>
+</tr>
+<tr>
+<td align="right">F1</td>
+<td align="left">2107182</td>
+<td align="left">30</td>
+<td align="left">0</td>
+<td align="left">0.03</td>
+</tr>
+<tr>
+<td align="right">R0</td>
+<td align="left">1411635</td>
+<td align="left">24</td>
+<td align="left">0</td>
+<td align="left">0.02</td>
+</tr>
+<tr>
+<td align="right">R1</td>
+<td align="left">652611</td>
+<td align="left">37</td>
+<td align="left">0.01</td>
+<td align="left">0.04</td>
+</tr>
+<tr>
+<td align="right">R2</td>
+<td align="left">935752</td>
+<td align="left">33</td>
+<td align="left">0</td>
+<td align="left">0.03</td>
+</tr>
+<tr>
+<td align="right">R3</td>
+<td align="left">783845</td>
+<td align="left">21</td>
+<td align="left">0</td>
+<td align="left">0.02</td>
+</tr>
+<tr>
+<td align="right">R4</td>
+<td align="left">383762</td>
+<td align="left">1421</td>
+<td align="left">0.37</td>
+<td align="left">1.45</td>
+</tr>
+<tr>
+<td align="right">R5</td>
+<td align="left">402257</td>
+<td align="left">58</td>
+<td align="left">0.01</td>
+<td align="left">0.06</td>
+</tr>
+<tr>
+<td align="right">C0</td>
+<td align="left">33903</td>
+<td align="left">1639</td>
+<td align="left">4.83</td>
+<td align="left">1.68</td>
+</tr>
+<tr>
+<td align="right">C1</td>
+<td align="left">109547</td>
+<td align="left">121</td>
+<td align="left">0.11</td>
+<td align="left">0.12</td>
+</tr>
+<tr>
+<td align="right">H3K9me1</td>
+<td align="left">869101</td>
+<td align="left">300</td>
+<td align="left">0.03</td>
+<td align="left">0.31</td>
+</tr>
+<tr>
+<td align="right">TF0</td>
+<td align="left">526151</td>
+<td align="left">84</td>
+<td align="left">0.02</td>
+<td align="left">0.09</td>
+</tr>
+<tr>
+<td align="right">TF1</td>
+<td align="left">675284</td>
+<td align="left">325</td>
+<td align="left">0.05</td>
+<td align="left">0.33</td>
+</tr>
+<tr>
+<td align="right">TF2</td>
+<td align="left">225116</td>
+<td align="left">3347</td>
+<td align="left">1.49</td>
+<td align="left">3.42</td>
+</tr>
+<tr>
+<td align="right">TSS</td>
+<td align="left">25724</td>
+<td align="left">20346</td>
+<td align="left">79.09</td>
+<td align="left">20.81</td>
+</tr>
+<tr>
+<td align="right">GS</td>
+<td align="left">79980</td>
+<td align="left">34958</td>
+<td align="left">43.71</td>
+<td align="left">35.76</td>
+</tr>
+<tr>
+<td align="right">E/GM</td>
+<td align="left">93920</td>
+<td align="left">13097</td>
+<td align="left">13.94</td>
+<td align="left">13.4</td>
+</tr>
+<tr>
+<td align="right">GM0</td>
+<td align="left">243427</td>
+<td align="left">1043</td>
+<td align="left">0.43</td>
+<td align="left">1.07</td>
+</tr>
+<tr>
+<td align="right">GM1</td>
+<td align="left">152188</td>
+<td align="left">2597</td>
+<td align="left">1.71</td>
+<td align="left">2.66</td>
+</tr>
+<tr>
+<td align="right">GE0</td>
+<td align="left">880359</td>
+<td align="left">700</td>
+<td align="left">0.08</td>
+<td align="left">0.72</td>
+</tr>
+<tr>
+<td align="right">GE1</td>
+<td align="left">352083</td>
+<td align="left">5015</td>
+<td align="left">1.42</td>
+<td align="left">5.13</td>
+</tr>
+<tr>
+<td align="right">GE2</td>
+<td align="left">82680</td>
+<td align="left">12098</td>
+<td align="left">14.63</td>
+<td align="left">12.37</td>
+</tr>
+</tbody></table>
+
+<p>Table 2 shows ~96% of Pol2 sites mapping to active chromatin, interpreted as: H3K9me1, TF activity, and gene bodies. </p>
+
+<h2>Run analysis between segway annotations and CTCF sites</h2>
+
+<pre><code class="r"># Create an intersection of segway and pol2 annotation bed files.
+intersectBed -a K562_segway.bed -b K562_ctcf.bed -wb &gt; K562_segway_ctcf.bed
+
+# Compute fraction overlap
+more K562_segway.bed | wc -l &gt; segway_ctcf_overlap.txt
+more K562_ctcf.bed | wc -l &gt;&gt; segway_ctcf_overlap.txt
+more K562_segway_ctcf.bed | wc -l &gt;&gt; segway_ctcf_overlap.txt
+
+# Cut out the 4th column from K562_segway_pol2.bed file
+cut -f 4 K562_segway_ctcf.bed &gt; K562_segway_ctcf.states
+
+# Run python parse_tsf.py file
+python parse_tfs.py K562_segway_ctcf.states K562_segway_annotation_counts.txt &gt; K562_segway_ctcf.analysis
+</code></pre>
+
+<p>Analysis of Segway and CTCF site intersections shows that CTCF data overlaps with 88.33% of C0 (strong CTCF) and 53.78% of C1 (weak CTCF) Segway annotations. This result shows that the majority of Segway CTCF annotations agree with experimental data, however these two categories only make up 19.16% of the the annotated CTCF sites. The rest are spread relitively evenly throuhgout the other annotation categories with slightly higher levels in R5 (repression) and GM1 (gene body middle).</p>
+
+<h4>CTCF binding site chromatin states</h4>
+
+<table><thead>
+<tr>
+<th align="right">Annotation</th>
+<th align="left">Original</th>
+<th align="left">Overlap</th>
+<th align="left">%_between</th>
+<th align="left">%_across</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">D</td>
+<td align="left">1616227</td>
+<td align="left">10136</td>
+<td align="left">0.63</td>
+<td align="left">2.18</td>
+</tr>
+<tr>
+<td align="right">L0</td>
+<td align="left">1159248</td>
+<td align="left">12118</td>
+<td align="left">1.05</td>
+<td align="left">2.61</td>
+</tr>
+<tr>
+<td align="right">L1</td>
+<td align="left">1450189</td>
+<td align="left">16829</td>
+<td align="left">1.16</td>
+<td align="left">3.62</td>
+</tr>
+<tr>
+<td align="right">F0</td>
+<td align="left">1597574</td>
+<td align="left">11799</td>
+<td align="left">0.74</td>
+<td align="left">2.54</td>
+</tr>
+<tr>
+<td align="right">F1</td>
+<td align="left">2107182</td>
+<td align="left">7905</td>
+<td align="left">0.38</td>
+<td align="left">1.7</td>
+</tr>
+<tr>
+<td align="right">R0</td>
+<td align="left">1411635</td>
+<td align="left">10616</td>
+<td align="left">0.75</td>
+<td align="left">2.29</td>
+</tr>
+<tr>
+<td align="right">R1</td>
+<td align="left">652611</td>
+<td align="left">20280</td>
+<td align="left">3.11</td>
+<td align="left">4.37</td>
+</tr>
+<tr>
+<td align="right">R2</td>
+<td align="left">935752</td>
+<td align="left">22322</td>
+<td align="left">2.39</td>
+<td align="left">4.81</td>
+</tr>
+<tr>
+<td align="right">R3</td>
+<td align="left">783845</td>
+<td align="left">18186</td>
+<td align="left">2.32</td>
+<td align="left">3.92</td>
+</tr>
+<tr>
+<td align="right">R4</td>
+<td align="left">383762</td>
+<td align="left">22184</td>
+<td align="left">5.78</td>
+<td align="left">4.78</td>
+</tr>
+<tr>
+<td align="right">R5</td>
+<td align="left">402257</td>
+<td align="left">28157</td>
+<td align="left">7</td>
+<td align="left">6.06</td>
+</tr>
+<tr>
+<td align="right">C0</td>
+<td align="left">33903</td>
+<td align="left">29947</td>
+<td align="left">88.33</td>
+<td align="left">6.45</td>
+</tr>
+<tr>
+<td align="right">C1</td>
+<td align="left">109547</td>
+<td align="left">59015</td>
+<td align="left">53.87</td>
+<td align="left">12.71</td>
+</tr>
+<tr>
+<td align="right">H3K9me1</td>
+<td align="left">869101</td>
+<td align="left">21410</td>
+<td align="left">2.46</td>
+<td align="left">4.61</td>
+</tr>
+<tr>
+<td align="right">TF0</td>
+<td align="left">526151</td>
+<td align="left">12777</td>
+<td align="left">2.43</td>
+<td align="left">2.75</td>
+</tr>
+<tr>
+<td align="right">TF1</td>
+<td align="left">675284</td>
+<td align="left">23805</td>
+<td align="left">3.53</td>
+<td align="left">5.12</td>
+</tr>
+<tr>
+<td align="right">TF2</td>
+<td align="left">225116</td>
+<td align="left">8596</td>
+<td align="left">3.82</td>
+<td align="left">1.85</td>
+</tr>
+<tr>
+<td align="right">TSS</td>
+<td align="left">25724</td>
+<td align="left">8664</td>
+<td align="left">33.68</td>
+<td align="left">1.87</td>
+</tr>
+<tr>
+<td align="right">GS</td>
+<td align="left">79980</td>
+<td align="left">21260</td>
+<td align="left">26.58</td>
+<td align="left">4.58</td>
+</tr>
+<tr>
+<td align="right">E/GM</td>
+<td align="left">93920</td>
+<td align="left">15624</td>
+<td align="left">16.64</td>
+<td align="left">3.36</td>
+</tr>
+<tr>
+<td align="right">GM0</td>
+<td align="left">243427</td>
+<td align="left">20694</td>
+<td align="left">8.5</td>
+<td align="left">4.46</td>
+</tr>
+<tr>
+<td align="right">GM1</td>
+<td align="left">152188</td>
+<td align="left">28384</td>
+<td align="left">18.65</td>
+<td align="left">6.11</td>
+</tr>
+<tr>
+<td align="right">GE0</td>
+<td align="left">880359</td>
+<td align="left">14055</td>
+<td align="left">1.6</td>
+<td align="left">3.03</td>
+</tr>
+<tr>
+<td align="right">GE1</td>
+<td align="left">352083</td>
+<td align="left">11607</td>
+<td align="left">3.3</td>
+<td align="left">2.5</td>
+</tr>
+<tr>
+<td align="right">GE2</td>
+<td align="left">82680</td>
+<td align="left">8124</td>
+<td align="left">9.83</td>
+<td align="left">1.75</td>
+</tr>
+</tbody></table>
+
+<h2>Analysis of Segway and metylseq sites</h2>
+
+<pre><code class="r"># Intersect Segway and methylseq bed files
+intersectBed -a K562_segway.bed -b K562_methylseq.bed -wb &gt; K562_segway_methylseq.bed
+more K562_segway.bed | wc -l &gt; segway_methylseq_overlap.txt
+more K562_methylseq.bed | wc -l &gt;&gt; segway_methylseq_overlap.txt
+more K562_segway_methylseq.bed | wc -l &gt;&gt; segway_methylseq_overlap.txt
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">File</th>
+<th align="right">Count</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">K562_segway.bed</td>
+<td align="right">16849745</td>
+</tr>
+<tr>
+<td align="left">K562_methylseq.bed</td>
+<td align="right">89590</td>
+</tr>
+<tr>
+<td align="left">K562_segway_methylseq.bed</td>
+<td align="right">117721</td>
+</tr>
+</tbody></table>
+
+<p>Intersection of the Segway annotations and methylseq show that methylseq sites map to multiple Segway annotations. This may be because methylseq sites stradle two bordering Segway annotations. For example, methylseq site chr1.284 intersects with two neighboring Segway annotations.</p>
+
+<pre><code class="r"># Extract Segway annotation and methylation state
+cut -f 4,14 K562_segway_methylseq.bed &gt; K562_segway_methylseq.states
+
+# Parse segway methylseq states file
+python parse_methylseq.py K562_segway_methylseq.states segway_annotation.txt &gt; K562_segway_methylseq.analysis
+</code></pre>
+
+<h4>Methyl-seq chromatin state annotations</h4>
+
+<table><thead>
+<tr>
+<th align="left">Annotation</th>
+<th align="right">%_fraction</th>
+<th align="right">Meth</th>
+<th align="right">Unmeth</th>
+<th align="right">%_Meth</th>
+<th align="right">%_Unmeth</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">D</td>
+<td align="right">2.03</td>
+<td align="right">1948</td>
+<td align="right">440</td>
+<td align="right">81.57</td>
+<td align="right">18.43</td>
+</tr>
+<tr>
+<td align="left">L0</td>
+<td align="right">5.51</td>
+<td align="right">5356</td>
+<td align="right">1129</td>
+<td align="right">82.59</td>
+<td align="right">17.41</td>
+</tr>
+<tr>
+<td align="left">L1</td>
+<td align="right">1.77</td>
+<td align="right">1744</td>
+<td align="right">343</td>
+<td align="right">83.56</td>
+<td align="right">16.44</td>
+</tr>
+<tr>
+<td align="left">F0</td>
+<td align="right">0.26</td>
+<td align="right">255</td>
+<td align="right">52</td>
+<td align="right">83.06</td>
+<td align="right">16.94</td>
+</tr>
+<tr>
+<td align="left">F1</td>
+<td align="right">0.37</td>
+<td align="right">369</td>
+<td align="right">64</td>
+<td align="right">85.22</td>
+<td align="right">14.78</td>
+</tr>
+<tr>
+<td align="left">R0</td>
+<td align="right">1.23</td>
+<td align="right">1366</td>
+<td align="right">77</td>
+<td align="right">94.66</td>
+<td align="right">5.34</td>
+</tr>
+<tr>
+<td align="left">R1</td>
+<td align="right">1</td>
+<td align="right">1063</td>
+<td align="right">116</td>
+<td align="right">90.16</td>
+<td align="right">9.84</td>
+</tr>
+<tr>
+<td align="left">R2</td>
+<td align="right">0.39</td>
+<td align="right">409</td>
+<td align="right">48</td>
+<td align="right">89.5</td>
+<td align="right">10.5</td>
+</tr>
+<tr>
+<td align="left">R3</td>
+<td align="right">4.06</td>
+<td align="right">4536</td>
+<td align="right">240</td>
+<td align="right">94.97</td>
+<td align="right">5.03</td>
+</tr>
+<tr>
+<td align="left">R4</td>
+<td align="right">0.66</td>
+<td align="right">558</td>
+<td align="right">216</td>
+<td align="right">72.09</td>
+<td align="right">27.91</td>
+</tr>
+<tr>
+<td align="left">R5</td>
+<td align="right">10.24</td>
+<td align="right">10787</td>
+<td align="right">1263</td>
+<td align="right">89.52</td>
+<td align="right">10.48</td>
+</tr>
+<tr>
+<td align="left">C0</td>
+<td align="right">1.7</td>
+<td align="right">1978</td>
+<td align="right">20</td>
+<td align="right">99</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">C1</td>
+<td align="right">1.35</td>
+<td align="right">1440</td>
+<td align="right">144</td>
+<td align="right">90.91</td>
+<td align="right">9.09</td>
+</tr>
+<tr>
+<td align="left">H3K9me1</td>
+<td align="right">0.98</td>
+<td align="right">802</td>
+<td align="right">350</td>
+<td align="right">69.62</td>
+<td align="right">30.38</td>
+</tr>
+<tr>
+<td align="left">TF0</td>
+<td align="right">21.19</td>
+<td align="right">21777</td>
+<td align="right">3164</td>
+<td align="right">87.31</td>
+<td align="right">12.69</td>
+</tr>
+<tr>
+<td align="left">TF1</td>
+<td align="right">2.69</td>
+<td align="right">1671</td>
+<td align="right">1500</td>
+<td align="right">52.7</td>
+<td align="right">47.3</td>
+</tr>
+<tr>
+<td align="left">TF2</td>
+<td align="right">10.8</td>
+<td align="right">4767</td>
+<td align="right">7948</td>
+<td align="right">37.49</td>
+<td align="right">62.51</td>
+</tr>
+<tr>
+<td align="left">TSS</td>
+<td align="right">12.43</td>
+<td align="right">14612</td>
+<td align="right">18</td>
+<td align="right">99.88</td>
+<td align="right">0.12</td>
+</tr>
+<tr>
+<td align="left">GS</td>
+<td align="right">8.39</td>
+<td align="right">9793</td>
+<td align="right">84</td>
+<td align="right">99.15</td>
+<td align="right">0.85</td>
+</tr>
+<tr>
+<td align="left">E/GM</td>
+<td align="right">0.58</td>
+<td align="right">638</td>
+<td align="right">47</td>
+<td align="right">93.14</td>
+<td align="right">6.86</td>
+</tr>
+<tr>
+<td align="left">GM0</td>
+<td align="right">0.5</td>
+<td align="right">460</td>
+<td align="right">133</td>
+<td align="right">77.57</td>
+<td align="right">22.43</td>
+</tr>
+<tr>
+<td align="left">GM1</td>
+<td align="right">6.11</td>
+<td align="right">6167</td>
+<td align="right">1023</td>
+<td align="right">85.77</td>
+<td align="right">14.23</td>
+</tr>
+<tr>
+<td align="left">GE0</td>
+<td align="right">0.29</td>
+<td align="right">94</td>
+<td align="right">246</td>
+<td align="right">27.65</td>
+<td align="right">72.35</td>
+</tr>
+<tr>
+<td align="left">GE1</td>
+<td align="right">0.45</td>
+<td align="right">78</td>
+<td align="right">450</td>
+<td align="right">14.77</td>
+<td align="right">85.23</td>
+</tr>
+<tr>
+<td align="left">GE2</td>
+<td align="right">5.04</td>
+<td align="right">3043</td>
+<td align="right">2895</td>
+<td align="right">51.25</td>
+<td align="right">48.75</td>
+</tr>
+</tbody></table>
+
+<p>Methylation of promoter CpG sites typically causes silencing of gene expression associated with those sites. The table above shows higher levels of methylated vs unmethylated states in most annotated regions. Though there are regions of low methylation in gene bodies (GE0, GE1, GE2) and transcription factor binding sites (TF1, TF2). 30.57% of methylation is found in repressed regions, 47.11% of all methylation signals are in transcription factor binding sites, and the remaining 21.36% are in gene bodies. The high level of methylation in transcription factor binding sites may be indicative of the role of methylation in silencing gene expression by inhibiting binding of transcription factors to their target binding sites. </p>
+
+<h2>Integrate chromatin state, CTCF binding and Methyl-seq data</h2>
+
+<pre><code class="r"># Intersect the three datasets
+intersectBed -a K562_segway_ctcf.bed -b K562_methylseq.bed -wb &gt; K562_segway_ctcf_methylseq.bed
+# Count the resulting number of annotations
+more K562_hmm_ctcf_methylseq.bed | wc -l
+
+# Extract Chromatin states and methylation status
+cut -f 4,14 K562_segway_ctcf_methylseq.bed &gt; K562_segway_ctcf_methylseq.states
+
+# Parse methylation status
+python parse_methylseq.py K562_segway_ctcf_methylseq.states segway_annotation.txt &gt; K562_segway_ctcf_methylseq.analysis
+</code></pre>
+
+<h4>CTCF binding site chromatin states and methylation status</h4>
+
+<table><thead>
+<tr>
+<th align="left">Annotation</th>
+<th align="right">%_fraction</th>
+<th align="right">Meth</th>
+<th align="right">Unmeth</th>
+<th align="right">%_Meth</th>
+<th align="right">%_Unmeth</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">D</td>
+<td align="right">0.07</td>
+<td align="right">12</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">L0</td>
+<td align="right">0.41</td>
+<td align="right">70</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">L1</td>
+<td align="right">0.24</td>
+<td align="right">40</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">F0</td>
+<td align="right">0.01</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">F1</td>
+<td align="right">0.01</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">R0</td>
+<td align="right">0.08</td>
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">R1</td>
+<td align="right">0.3</td>
+<td align="right">51</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">R2</td>
+<td align="right">0.09</td>
+<td align="right">16</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">R3</td>
+<td align="right">0.92</td>
+<td align="right">156</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">R4</td>
+<td align="right">0.46</td>
+<td align="right">78</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">R5</td>
+<td align="right">7.82</td>
+<td align="right">1320</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">C0</td>
+<td align="right">10.55</td>
+<td align="right">1782</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">C1</td>
+<td align="right">5.67</td>
+<td align="right">958</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">H3K9me1</td>
+<td align="right">0.23</td>
+<td align="right">39</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">TF0</td>
+<td align="right">5.13</td>
+<td align="right">867</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">TF1</td>
+<td align="right">0.89</td>
+<td align="right">151</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">TF2</td>
+<td align="right">3.39</td>
+<td align="right">572</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">TSS</td>
+<td align="right">30.38</td>
+<td align="right">5131</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">GS</td>
+<td align="right">17.3</td>
+<td align="right">2921</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">E/GM</td>
+<td align="right">0.71</td>
+<td align="right">120</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">GM0</td>
+<td align="right">0.4</td>
+<td align="right">67</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">GM1</td>
+<td align="right">10.56</td>
+<td align="right">1783</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">GE0</td>
+<td align="right">0.04</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">GE1</td>
+<td align="right">0.09</td>
+<td align="right">16</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">GE2</td>
+<td align="right">4.23</td>
+<td align="right">714</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="right">0</td>
+</tr>
+</tbody></table>
+
+<p>There are a total of 14,437 annotations where CTCF and Methyl-seq data intersect. Analysis of the methylation status of CTCF sites shows 100% of the CTCF sites with methylation information are fully methylated. This high level of methylation is a bit surprising. CTCF is highly associated with gene repression and has insulating functions where it blocks enhancers and preventing the spread of heterochromatin {Cuddapah, 2009}. </p>
+
+<h1>Question 3: Compare results between Segway and ChromHMM annotations</h1>
+
+<h2>Pol2 binding sites</h2>
+
+</body>
+
+</html>
+

@@ -1,0 +1,308 @@
+Golden
+========================================================
+# Question 1: Compare Segway and ChromHMM bed files #
+
+The k562 segway bed file is 1.1 gigabytes in size while the ChromHMM bed files only 44 megabytes. This may be because ChromHMM determines chromatin state in chunks, hundreds of base pairs, and seems to skip large sections of the chromosome, especially at the ends. On the other hand, segway is able to perform analysis at base pair resolution, and annotate much smaller sections of the genome.
+
+Another reason for the larger size of the Segway bed file is that Segway annotates more states than ChromHMM. Segway identifies 25 different states compared to the 15 found by ChromHMM.
+
+File name | File size|	Number of lines
+:---|---:|---:
+K562_segway.bed|	1.1G|16,849,745
+K562_hmm.bed|	44M	|621,678
+
+# Question 2: Perform analysis of Segway annotations #
+
+## Count total number of states in segway annotation file ##
+
+To count the total number of states, run annotations_segway.do which counts the number of lines with the given segway states. First, make annotations_segway.do executable and then run and pipe the output to segway_out.txt file.
+
+```{r, eval=FALSE}
+chmod u+x annotations_segway.do
+./annotations_segway.do > segway_out.txt
+
+# Cut the first column of segway_annotation file because parse_fst.py
+# can only handle a single column for the annotation in a later step.
+cut -f 1 segway_annotation.txt > cut_segway_annotation.txt
+
+# Paste annotations with counts
+paste cut_segway_annotation.txt segway_out.txt > K562_segway_annotation_counts.txt
+```
+
+#### Segway annotations and their counts #####
+
+| Annotation | Description | Count |
+|:-----------|------------:|:------|
+|D  |  dead zone | 1616227
+|L0  |  low zone  | 1159248
+|L1  |  low zone  | 1450189
+|F0  |  FAIRE only  | 1597574
+|F1  |  FAIRE only  | 2107182
+|R0  |  repression  | 1411635
+|R1  |  repression  | 652611
+|R2  |  repression  | 935752
+|R3  |  repression  | 783845|
+R4  |  repression  | 383762
+R5  |  repression  | 402257
+C0  |  CTCF (strong)  | 33903
+C1  |  CTCF (weak)  | 109547
+H3K9me1  |  H3K9me1 only  | 869101
+TF0  |  transcription factor activity  | 526151
+TF1  |  transcription factor activity  | 675284
+TF2  |  transcription factor activity  | 225116
+TSS  |  transcription start site  | 25724
+GS  |  gene body (start)  | 79980
+E/GM  |  enhancer/gene middle  | 93920
+GM0  |  gene body (middle)  | 243427
+GM1  |  gene body (middle)  | 152188
+GE0  |  gene body (end)  | 880359
+GE1  |  gene body (end)  | 352083
+GE2  |  gene body (end)  | 82680
+[Table 1: Count of states in k562_segway.bed]
+
+## Analyze overlap with Pol2 sites ##
+
+### Get overlap between segway and pol2 annotations ###
+
+
+```{r, eval=FALSE}
+# Create an intersection of segway and pol2 annotation bed files.
+intersectBed -a k562_segway.bed -b K562_pol2.bed -wb > K562_segway_pol2.bed
+
+# Compute fraction overlap
+more K562_segway.bed | wc -l > segway_pol2_overlap.txt
+more K562_pol2.bed | wc -l >> segway_pol2_overlap.txt
+more K562_segway_pol2.bed | wc -l >> segway_pol2_overlap.txt
+
+# Count the segway annotations that overlap with pol2 annotations
+sed 's/k562_segway.bed/K562_segway_pol2.bed/g' annotations_segway.do > annotations_segway_pol2.do
+chmod u+x annotations_segway_pol2.do
+./annotations_segway_pol2.do > segway_pol2_out.txt
+```
+
+Only 0.5% of segway annotations overlap with pol2 annotations. This is in contrast to the 6% of ChromHMM annotations that overlap with pol2. Examination of the K562_segway_pol2.bed file shows many annotations fall within transcription start sites, enhancers and gene bodies relative to the other annotations. 
+
+### Parse annotations of segway_pol2 intersections ###
+
+Parse the annotations of segway and pol2 intersection using parse_tfs.py script. 
+
+```{r, eval=FALSE}
+# Cut out the 4th column from K562_segway_pol2.bed file
+cut -f 4 K562_segway_pol2.bed > K562_segway_pol2.states
+
+# Run python parse_tsf.py file
+python parse_tfs.py K562_segway_pol2.states K562_segway_annotation_counts.txt > K562_segway_pol2.analysis
+```
+
+The resulting analysis of the intersection of segway and pol2 states show that the greatest overlap between the annotation files is TSS (transcription start site) with an overlap of 79.09%, but 20.81% of pol2 binding sites map to transcription start sites. The annotation that contributes the most to the Pol2/annotation state overlap is GS (gene body start) which contributes 35.76% of the intersections.
+
+#### Pol2 site chromatin states ####
+
+Annotation | Original | Overlap | %_between | %_accross
+----------:|:---------|:--------|:----------|:---------
+D | 1616227 | 116 | 0.01 | 0.12
+L0 | 1159248 | 129 | 0.01 | 0.13
+L1 | 1450189 | 121 | 0.01 | 0.12
+F0 | 1597574 | 108 | 0.01 | 0.11
+F1 | 2107182 | 30 | 0 | 0.03
+R0 | 1411635 | 24 | 0 | 0.02
+R1 | 652611 | 37 | 0.01 | 0.04
+R2 | 935752 | 33 | 0 | 0.03
+R3 | 783845 | 21 | 0 | 0.02
+R4 | 383762 | 1421 | 0.37 | 1.45
+R5 | 402257 | 58 | 0.01 | 0.06
+C0 | 33903 | 1639 | 4.83 | 1.68
+C1 | 109547 | 121 | 0.11 | 0.12
+H3K9me1 | 869101 | 300 | 0.03 | 0.31
+TF0 | 526151 | 84 | 0.02 | 0.09
+TF1 | 675284 | 325 | 0.05 | 0.33
+TF2 | 225116 | 3347 | 1.49 | 3.42
+TSS | 25724 | 20346 | 79.09 | 20.81
+GS | 79980 | 34958 | 43.71 | 35.76
+E/GM | 93920 | 13097 | 13.94 | 13.4
+GM0 | 243427 | 1043 | 0.43 | 1.07
+GM1 | 152188 | 2597 | 1.71 | 2.66
+GE0 | 880359 | 700 | 0.08 | 0.72
+GE1 | 352083 | 5015 | 1.42 | 5.13
+GE2 | 82680 | 12098 | 14.63 | 12.37
+
+Table 2 shows ~96% of Pol2 sites mapping to active chromatin, interpreted as: H3K9me1, TF activity, and gene bodies. 
+
+## Run analysis between segway annotations and CTCF sites ##
+
+```{r, eval=FALSE}
+# Create an intersection of segway and pol2 annotation bed files.
+intersectBed -a K562_segway.bed -b K562_ctcf.bed -wb > K562_segway_ctcf.bed
+
+# Compute fraction overlap
+more K562_segway.bed | wc -l > segway_ctcf_overlap.txt
+more K562_ctcf.bed | wc -l >> segway_ctcf_overlap.txt
+more K562_segway_ctcf.bed | wc -l >> segway_ctcf_overlap.txt
+
+# Cut out the 4th column from K562_segway_pol2.bed file
+cut -f 4 K562_segway_ctcf.bed > K562_segway_ctcf.states
+
+# Run python parse_tsf.py file
+python parse_tfs.py K562_segway_ctcf.states K562_segway_annotation_counts.txt > K562_segway_ctcf.analysis
+```
+
+Analysis of Segway and CTCF site intersections shows that CTCF data overlaps with 88.33% of C0 (strong CTCF) and 53.78% of C1 (weak CTCF) Segway annotations. This result shows that the majority of Segway CTCF annotations agree with experimental data, however these two categories only make up `r 6.45 +12.71`% of the the annotated CTCF sites. The rest are spread relitively evenly throuhgout the other annotation categories with slightly higher levels in R5 (repression) and GM1 (gene body middle).
+
+#### CTCF binding site chromatin states ####
+
+Annotation | Original | Overlap | %_between | %_across
+---: | :--- | :--- | :--- | :---
+D | 1616227 | 10136 | 0.63 | 2.18
+L0 | 1159248 | 12118 | 1.05 | 2.61
+L1 | 1450189 | 16829 | 1.16 | 3.62
+F0 | 1597574 | 11799 | 0.74 | 2.54
+F1 | 2107182 | 7905 | 0.38 | 1.7
+R0 | 1411635 | 10616 | 0.75 | 2.29
+R1 | 652611 | 20280 | 3.11 | 4.37
+R2 | 935752 | 22322 | 2.39 | 4.81
+R3 | 783845 | 18186 | 2.32 | 3.92
+R4 | 383762 | 22184 | 5.78 | 4.78
+R5 | 402257 | 28157 | 7 | 6.06
+C0 | 33903 | 29947 | 88.33 | 6.45
+C1 | 109547 | 59015 | 53.87 | 12.71
+H3K9me1 | 869101 | 21410 | 2.46 | 4.61
+TF0 | 526151 | 12777 | 2.43 | 2.75
+TF1 | 675284 | 23805 | 3.53 | 5.12
+TF2 | 225116 | 8596 | 3.82 | 1.85
+TSS | 25724 | 8664 | 33.68 | 1.87
+GS | 79980 | 21260 | 26.58 | 4.58
+E/GM | 93920 | 15624 | 16.64 | 3.36
+GM0 | 243427 | 20694 | 8.5 | 4.46
+GM1 | 152188 | 28384 | 18.65 | 6.11
+GE0 | 880359 | 14055 | 1.6 | 3.03
+GE1 | 352083 | 11607 | 3.3 | 2.5
+GE2 | 82680 | 8124 | 9.83 | 1.75
+
+## Analysis of Segway and metylseq sites ##
+
+```{r, eval=FALSE}
+# Intersect Segway and methylseq bed files
+intersectBed -a K562_segway.bed -b K562_methylseq.bed -wb > K562_segway_methylseq.bed
+more K562_segway.bed | wc -l > segway_methylseq_overlap.txt
+more K562_methylseq.bed | wc -l >> segway_methylseq_overlap.txt
+more K562_segway_methylseq.bed | wc -l >> segway_methylseq_overlap.txt
+```
+
+File | Count
+:---|---:
+K562_segway.bed | 16849745
+K562_methylseq.bed | 89590
+K562_segway_methylseq.bed | 117721
+
+Intersection of the Segway annotations and methylseq show that methylseq sites map to multiple Segway annotations. This may be because methylseq sites stradle two bordering Segway annotations. For example, methylseq site chr1.284 intersects with two neighboring Segway annotations.
+
+```{r, eval=FALSE}
+# Extract Segway annotation and methylation state
+cut -f 4,14 K562_segway_methylseq.bed > K562_segway_methylseq.states
+
+# Parse segway methylseq states file
+python parse_methylseq.py K562_segway_methylseq.states segway_annotation.txt > K562_segway_methylseq.analysis
+```
+
+#### Methyl-seq chromatin state annotations ####
+
+Annotation | %_fraction | Meth | Unmeth | %_Meth | %_Unmeth
+:---- | ---: | ---: | ---: | ---: | ---:
+D | 2.03 | 1948 | 440 | 81.57 | 18.43
+L0 | 5.51 | 5356 | 1129 | 82.59 | 17.41
+L1 | 1.77 | 1744 | 343 | 83.56 | 16.44
+F0 | 0.26 | 255 | 52 | 83.06 | 16.94
+F1 | 0.37 | 369 | 64 | 85.22 | 14.78
+R0 | 1.23 | 1366 | 77 | 94.66 | 5.34
+R1 | 1 | 1063 | 116 | 90.16 | 9.84
+R2 | 0.39 | 409 | 48 | 89.5 | 10.5
+R3 | 4.06 | 4536 | 240 | 94.97 | 5.03
+R4 | 0.66 | 558 | 216 | 72.09 | 27.91
+R5 | 10.24 | 10787 | 1263 | 89.52 | 10.48
+C0 | 1.7 | 1978 | 20 | 99 | 1
+C1 | 1.35 | 1440 | 144 | 90.91 | 9.09
+H3K9me1 | 0.98 | 802 | 350 | 69.62 | 30.38
+TF0 | 21.19 | 21777 | 3164 | 87.31 | 12.69
+TF1 | 2.69 | 1671 | 1500 | 52.7 | 47.3
+TF2 | 10.8 | 4767 | 7948 | 37.49 | 62.51
+TSS | 12.43 | 14612 | 18 | 99.88 | 0.12
+GS | 8.39 | 9793 | 84 | 99.15 | 0.85
+E/GM | 0.58 | 638 | 47 | 93.14 | 6.86
+GM0 | 0.5 | 460 | 133 | 77.57 | 22.43
+GM1 | 6.11 | 6167 | 1023 | 85.77 | 14.23
+GE0 | 0.29 | 94 | 246 | 27.65 | 72.35
+GE1 | 0.45 | 78 | 450 | 14.77 | 85.23
+GE2 | 5.04 | 3043 | 2895 | 51.25 | 48.75
+
+Methylation of promoter CpG sites typically causes silencing of gene expression associated with those sites. The table above shows higher levels of methylated vs unmethylated states in most annotated regions. Though there are regions of low methylation in gene bodies (GE0, GE1, GE2) and transcription factor binding sites (TF1, TF2). 30.57% of methylation is found in repressed regions, 47.11% of all methylation signals are in transcription factor binding sites, and the remaining 21.36% are in gene bodies. The high level of methylation in transcription factor binding sites may be indicative of the role of methylation in silencing gene expression by inhibiting binding of transcription factors to their target binding sites. 
+
+## Integrate chromatin state, CTCF binding and Methyl-seq data ##
+
+```{r, eval=FALSE}
+# Intersect the three datasets
+intersectBed -a K562_segway_ctcf.bed -b K562_methylseq.bed -wb > K562_segway_ctcf_methylseq.bed
+# Count the resulting number of annotations
+more K562_hmm_ctcf_methylseq.bed | wc -l
+
+# Extract Chromatin states and methylation status
+cut -f 4,14 K562_segway_ctcf_methylseq.bed > K562_segway_ctcf_methylseq.states
+
+# Parse methylation status
+python parse_methylseq.py K562_segway_ctcf_methylseq.states segway_annotation.txt > K562_segway_ctcf_methylseq.analysis
+```
+
+#### CTCF binding site chromatin states and methylation status ####
+
+Annotation | %_fraction | Meth | Unmeth | %_Meth | %_Unmeth
+:---- | ---: | ---: | ---: | ---: | ---:
+D | 0.07 | 12 | 0 | 100 | 0
+L0 | 0.41 | 70 | 0 | 100 | 0
+L1 | 0.24 | 40 | 0 | 100 | 0
+F0 | 0.01 | 2 | 0 | 100 | 0
+F1 | 0.01 | 2 | 0 | 100 | 0
+R0 | 0.08 | 13 | 0 | 100 | 0
+R1 | 0.3 | 51 | 0 | 100 | 0
+R2 | 0.09 | 16 | 0 | 100 | 0
+R3 | 0.92 | 156 | 0 | 100 | 0
+R4 | 0.46 | 78 | 0 | 100 | 0
+R5 | 7.82 | 1320 | 0 | 100 | 0
+C0 | 10.55 | 1782 | 0 | 100 | 0
+C1 | 5.67 | 958 | 0 | 100 | 0
+H3K9me1 | 0.23 | 39 | 0 | 100 | 0
+TF0 | 5.13 | 867 | 0 | 100 | 0
+TF1 | 0.89 | 151 | 0 | 100 | 0
+TF2 | 3.39 | 572 | 0 | 100 | 0
+TSS | 30.38 | 5131 | 0 | 100 | 0
+GS | 17.3 | 2921 | 0 | 100 | 0
+E/GM | 0.71 | 120 | 0 | 100 | 0
+GM0 | 0.4 | 67 | 0 | 100 | 0
+GM1 | 10.56 | 1783 | 0 | 100 | 0
+GE0 | 0.04 | 6 | 0 | 100 | 0
+GE1 | 0.09 | 16 | 0 | 100 | 0
+GE2 | 4.23 | 714 | 0 | 100 | 0
+
+There are a total of 14,437 annotations where CTCF and Methyl-seq data intersect. Analysis of the methylation status of CTCF sites shows 100% of the CTCF sites with methylation information are fully methylated. This high level of methylation is a bit surprising. CTCF is highly associated with gene repression and has insulating functions where it blocks enhancers and preventing the spread of heterochromatin {Cuddapah, 2009}. 
+
+# Question 3: Compare results between Segway and ChromHMM annotations #
+
+In general, Segway shows a greater level of detail in the annotations that are given. There are more annotations, some with multiple levels of activity, there is also finer resolution. In one sense, having a greater level of detail is helpful in identifying the regions of 
+
+## Pol2 binding sites ##
+
+ChromHMM shows high levels of Pol2 binding in regions annotated as promoters and enhancers. Segway shows high levels of biding in transcription start sites, gene body start sites, and enhancer regions. These annotations roughly match each other. 
+
+## CTCF binding sites ##
+
+ChromHMM shows high levels of CTCF bidining in insulator and heterochromatin regions consistent with its function in suppressing gene expression by regulating chromatin structure. Segway shows ~58% of CTCF binding happens in dead or repressed regions. Almost 40% of CTCF binding sites fall within regions of supposed gene expression. 
+
+## Methyl-seq sites ##
+
+ChromHMM showed a large fraction of methylation annotates to heterochromatin and repressed loci. Segway annotations show the largest fraction of methylation occurs in transcription factor binding and trascription start sites. 
+
+## CTCF/Methyl-seq integration ##
+
+Both ChromHMM and Segway show that all CTCF sites with methylation information are fully methylated. 
+
+# Question 4: Implications of analysis #
+
+

@@ -1,0 +1,92 @@
+# Questions by Tao Wang
+
+Genotypes were screened for SNPs that had a missing rate of more than 10%. Individual SNP associations were calculated using general linear model for each SNP.
+
+```{r, eval=FALSE}
+setwd("~/cge/final/tao")
+# Read ped file with genotype data
+ped <- read.csv("./questiondat_tao.csv", header=TRUE)
+
+# check missing along columns. Use inline function to calculate the missingness for each SNP
+missing <- apply(ped,2,function(x) sum(is.na(x))/length(x))
+
+# remove SNPs with missing rate > 10%
+missing <- subset(missing, (missing > 0.1))
+ped <- ped[,(!names(ped) %in% names(missing))]
+
+# Test association
+# Add additive model genotypes to the table
+testdat <- as.data.frame(ped)
+# Convert phenotype to a factor
+testdat$PHENOTY <- factor(testdat$PHENOTY)
+# Use a general linearized model with binomial distribution to test
+total <- dim(testdat)[1]
+pb <- txtProgressBar(min=0,max=total, style=3)
+glm_tests <- list()
+for (i in 2:length(names(testdat))){
+  setTxtProgressBar(pb, i)
+  snp_glm <- summary(glm(as.formula(paste('PHENOTY~',
+                                          names(testdat)[i])), 
+                 family = 'binomial', data = testdat))$coef
+  glm_tests[[names(testdat)[i]]] <- snp_glm
+}
+close(pb)
+
+# Convert to data table
+glm_pval_dat <- as.data.frame(matrix(nrow = length(glm_tests), ncol = 2))
+names(glm_pval_dat) <- c('snp', 'pvalue')
+for (i in 1:length(glm_tests)){
+  glm_pval_dat[i,'snp'] <- names(glm_tests)[i]
+  if (dim(glm_tests[[i]])[1] == 1 ){
+    glm_pval_dat[i,'pvalue'] <- NA
+  } else {
+    glm_pval_dat[i,'pvalue'] <- glm_tests[[i]][2,4]
+  }
+}
+
+# Remove NA values
+glm_pval_dat <- glm_pval_dat[complete.cases(glm_pval_dat),]
+
+write.table(glm_pval_dat, file = 'snp_pval.txt', row.names = FALSE,
+            col.names = TRUE)
+```
+
+The top SNP in this analysis was rs661891, this gene is located within PKRCQ.
+
+```{r}
+glm_pval_dat <- read.table('snp_pval.txt', header = TRUE)
+top_snp <- subset(glm_pval_dat, pvalue == min(glm_pval_dat$pvalue))
+print(top_snp)
+# Top SNP is rs661891 in gene PRKCQ
+```
+
+To perform gene association, I first extracted SNPs that were 10kb away from the gene start and stop site. This was to include any SNPs within potential regulatory regions. Gene based p-values were calculated using Fisher's method for combining p-values which assumes the resulting statistic follows a chi-square distribution with 2*n degrees of freedom, where 'n' is the number of p-values being combined {chapman, 2008}.
+
+```{r, eval = FALSE}
+# annotate SNP locations
+annot <- read.table('illumina550_chr10.txt', header = TRUE)
+snp_pval <- merge(annot, glm_pval_dat, by.x = 'name', by.y = 'snp')
+
+# Gene where top SNP is located
+gene <- data.frame(gene = 'PKRCQ',
+          chr = 'chr10',
+          txStart = 6469105,
+          txEnd = 6622254)
+
+## extract SNPs within gene
+gene_snps <- subset(snp_pval, 
+                    (chromStart >= (gene$txStart-10000) &
+                      chromEnd <= (gene$txEnd + 10000)))
+
+# Combine pvalues using Fisher's test which assumes the combined pvalues
+# follow a chi-square distribution with 2*n degrees of freedom
+t_fisher <- -2*sum(log(gene_snps$pvalue))
+gene_chisq <- pchisq(t_fisher, 2*dim(gene_snps)[1],lower.tail = FALSE)
+```
+
+The gene based p-value is:
+
+```{r}
+print(gene_chisq)
+```
+

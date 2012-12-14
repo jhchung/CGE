@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Auton Part 2</title>
+
+<base target="_blank"/>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Auton Part 2</h1>
+
+<h2>Calculation of Fst scores</h2>
+
+<p>The Fst scores calculated using the Weir and Cockerham method comparing the populations are shown in Table 1. The pairwise Fst values show lower differentiation between African-European and African-Asian pairs and higher level of differentiation between European-Asian populations. The higher level of differentiation between European and Asian populations because patterns of migration through human history show that humans moved out of Africa to eventually form the different populations. Therefore, the African population serves as the evolutionary common ancestor to the European and Asian populations. In otherwords, after migrating out of Africa, the European and Asian populations took different evolutionary paths and the lower level of differentiation between each population and the African population points to the common ancestors that each population had. </p>
+
+<p><strong>Table 1: Mean and Weighted Fst scores</strong></p>
+
+<table><thead>
+<tr>
+<th>Population</th>
+<th>Mean Fst</th>
+<th>Weighted Fst</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CEU v YRI</td>
+<td>0.22196</td>
+<td>0.072607</td>
+</tr>
+<tr>
+<td>CEU v CHB</td>
+<td>0.19103</td>
+<td>0.066182</td>
+</tr>
+<tr>
+<td>YRI v CHB</td>
+<td>0.22196</td>
+<td>0.072607</td>
+</tr>
+</tbody></table>
+
+<h2>Top SNP in region 3</h2>
+
+<p>The top snp is located on Chromosome 2 at position 135911422. A search of the dbSNP database shows this position maps to rs17261772. This SNP is located within exon 19 of the RAB3GAP1 gene. RAB3GAP1 (RAB3 GTPase activation protein subunit 1) encodes for the catalytic subunit of Rab GTPase activating protein complex. Mutations in this gene have been found in Warburg micro syndrome. Warburg micro syndrome is an autosomal recessive syndrome that is characterized by abnormalities in the eye, central nervous system and genitalia {Aligianis 2005}. There is a possible founder effect in the Danish population indicated by a common haplotype shared by unrelated individuals in that population {Morris-Rosendahl 2010}. </p>
+
+<h3>Description of allele frequency</h3>
+
+<p>rs17261772 is a tri-allelic SNP with C/G/T as possible alternative alleles. The C allele leads to a synonymous variant while the G allele leads to a missense variant. In the CHB population, the SNP is monomorphic for the C allele while in the CEU population, the T and C alleles are present. The following table shows the allele frequencies in the dataset. </p>
+
+<p><strong>Table 2: Allele frequency in dataset</strong></p>
+
+<pre><code>##  CHROM       POS   FREQ POP
+##      2 135911422 0.2353 CEU
+##      2 135911422 1.0000 CHB
+</code></pre>
+
+<p><strong>Table 3: rs17261772 allele frequency in various populations</strong></p>
+
+<table><thead>
+<tr>
+<th align="right">Population</th>
+<th align="left">T frequency</th>
+<th align="left">C frequency</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">All</td>
+<td align="left">27%</td>
+<td align="left">73%</td>
+</tr>
+<tr>
+<td align="right">EUR</td>
+<td align="left">59%</td>
+<td align="left">41%</td>
+</tr>
+<tr>
+<td align="right">AFR</td>
+<td align="left">41%</td>
+<td align="left">96%</td>
+</tr>
+<tr>
+<td align="right">ASN</td>
+<td align="left">0%</td>
+<td align="left">100%</td>
+</tr>
+</tbody></table>
+
+<p>In most other populations, the T allele is the minor allele. Table 3 shows the allele frequency for different populations taken from 1000 genomes data. The high frequency of T allele in the CEU population is most likely due to a founder effect where a subset of the population that migrated into Europe contained the T allele and because both the T and C alleles code for the same amino acid, Phe, there was no selective pressure to keep one allele over the other. </p>
+
+</body>
+
+</html>
+
