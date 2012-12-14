@@ -1,6 +1,9 @@
 #################
 ## Eclipse
 #################
+*.RData
+illumina550_chr10.txt
+questiondat_tao.csv
 
 *.pydevproject
 .project
